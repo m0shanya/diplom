@@ -8,15 +8,20 @@
             Your username and password didn't match.
             Please try again.
         </p>
+    {% elif user.is_authenticated %}
+        <p>
+            You are already logged in.
+            Go <a href="/">shopping</a>.
+        </p>
     {% else %}
         <p>Please, use the following form to log-in:</p>
+        <div class="login-form">
+            <form action="{% url "login" %}" method="post">
+                {{ form|crispy }}
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}"/>
+                <p><input type="submit" value="Log-in"></p>
+            </form>
+        </div>
     {% endif %}
-    <div class="login-form">
-        <form action="{% url "login" %}" method="post">
-            {{ form|crispy }}
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ next }}"/>
-            <p><input type="submit" value="Log-in"></p>
-        </form>
-    </div>
 {% endblock %}

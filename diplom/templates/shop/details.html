@@ -31,7 +31,6 @@
       </form>
       <form method="post" action="{% url 'cart_add' product.id %}">
         {% csrf_token %}
-        <div class="container">
             <h3 class="mb-3">Add to cart</h3>
             <div class="row">
               <div class="col-6">

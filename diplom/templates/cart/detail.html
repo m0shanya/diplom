@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
     <h1>Your shopping cart</h1>
-    <table class="cart">
+    <table class="table">
         <thead>
         <tr>
             <th>Image</th>
@@ -21,13 +21,13 @@
             {% with product=item.product %}
                 <tr>
                     <td>
-                        <a href="{{ product.get_absolute_url }}">
+                        <a href="{% url "product_details_view" product.id%}">
                             <img src="
                                 {% if product.image %}
                                     {{ product.image.url }}
                                 {% else %}
                                     {% static 'no-image.jpg' %}
-                                {% endif %}">
+                                {% endif %}" width="80" height="80">
                         </a>
                     </td>
                     <td>{{ product.title }}</td>
