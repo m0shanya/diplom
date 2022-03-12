@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from cart.views import cart_detail, cart_add, cart_remove
 from shop.views import prod_list, user_login, logout_view, product_details_view
 
@@ -30,4 +33,4 @@ urlpatterns = [
     path('remove/<int:product_id>', cart_remove, name='cart_remove'),
     path('login/', user_login, name='login'),
     path('logout/', logout_view, name='logout'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
