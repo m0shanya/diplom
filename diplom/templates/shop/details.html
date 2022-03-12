@@ -5,11 +5,6 @@
 {% block content %}
 <main class="product-details">
   <h1 class="my-4">{{ product.title }}</h1>
-  <form action="{% url "cart_add" product.id %}" method="post">
-      {{ cart_product_form }}
-      {% csrf_token %}
-      <input type="submit" value="Add to cart">
-  </form>
   <div class="row">
     <div class="col-8">
       <h3 class="mb-3">Cost: {{ product.cost }}</h3>
@@ -33,6 +28,24 @@
             </div>
             </div>
           </div>
+      </form>
+      <form method="post" action="{% url 'cart_add' product.id %}">
+        {% csrf_token %}
+        <div class="container">
+            <h3 class="mb-3">Add to cart</h3>
+            <div class="row">
+              <div class="col-6">
+                <div class="input-group mb-3">
+                  <input name="quantity" type="number" class="form-control" placeholder="Quantity"
+                         aria-label="Quantity" aria-describedby="product-quantity" max="{{ product.quantity }}"
+                    value="{{ product.quantity }}">
+                    <span class="input-group-text" id="product-quantity">
+                      <button href="{% url 'cart_add' product.id %}"  type="submit" class="btn">in Cart</button>
+                    </span>
+                </div>
+              </div>
+            </div>
+        </div>
       </form>
 
       {% if product.purchases.exists %}
