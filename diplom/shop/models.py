@@ -18,3 +18,6 @@ class Buy(models.Model):
     )
     count = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+
+
+

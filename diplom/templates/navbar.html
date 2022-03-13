@@ -3,16 +3,48 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand">My Shop</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/">Products</a>
-        <a class="nav-link" href="/cart/">Cart</a>
-        <a class="nav-link" href="/login/">LogIn</a>
-        <a class="nav-link" href="/logout/">LogOut</a>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" aria-current="page" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Products
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/">All products</a></li>
+              <div class="btn-group dropend">
+                  <a type="button" class="btn">
+                      Categories
+                  </a>
+                  <a type="button" class="btn dropdown-toggle dropdown-toggle-split"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="visually-hidden">Toggle Dropright</span>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <!-- Dropdown menu links -->
+                  </ul>
+              </div>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/cart/">Cart</a>
+        </li>
+      </ul>
     </div>
   </div>
+  <ul class="nav justify-content-end">
+  {% if user.is_authenticated %}
+    <li class="navbar-nav">
+      <a class="nav-link" href="/logout/">LogOut</a>
+    </li>
+  {% else %}
+    <li class="navbar-nav">
+      <p class="text">
+        <a class="text-reset" href="/login/">LogIn</a>/<a href="/register/" class="text-reset">Registration</a>
+      </p>
+    </li>
+  {% endif %}
+  </ul>
 </nav>

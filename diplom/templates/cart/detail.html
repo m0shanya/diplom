@@ -34,7 +34,7 @@
                     <td>{{ item.quantity }}</td>
                     <td class="num">{{ item.cost }}</td>
                     <td class="num">{{ item.total_cost }}</td>
-                    <td><a href="{% url "cart_remove" product.id%}">Remove</a></td>
+                    <td><a class="btn btn-danger btn-sm" href="{% url "cart_remove" product.id%}" role="button">Remove</a></td>
                 </tr>
             {% endwith %}
         {% endfor %}
@@ -46,6 +46,6 @@
         </tbody>
     </table>
     <p class="text-right">
-        <a href="{% url "main" %}" class="button light">Continue shopping</a>
+        <a class="btn btn-dark btn-sm" href="{% url "main" %}" role="button">Continue shopping</a>
     </p>
 {% endblock %}
