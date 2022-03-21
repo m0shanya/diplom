@@ -7,10 +7,15 @@ class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     link = models.URLField(null=True, blank=True)
+    slug = models.SlugField(max_length=200)
     category = models.ForeignKey(
         'Category', on_delete=models.CASCADE
     )
     cost = models.DecimalField(decimal_places=2, max_digits=250, default=0)
+
+    class Meta:
+        ordering = ('title',)
+        index_together = (('id', 'slug'),)
 
     def __str__(self):
         return f"{self.title} - {self.cost}"
@@ -29,5 +34,12 @@ class Buy(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=300)
-    description = models.TextField(max_length=500)
     slug = models.SlugField(max_length=250, unique=True)
+
+    class Meta:
+        ordering = ('title',)
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+    def __str__(self):
+        return self.title
