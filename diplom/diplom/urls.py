@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from cart.views import cart_detail, cart_add, cart_remove
-from shop.views import prod_list, product_details_view
+from shop.views import prod_list, product_details_view, purchase_history
 from diplom.authentication import user_login, logout_view, register
 
 urlpatterns = [
@@ -34,5 +34,6 @@ urlpatterns = [
     path('remove/<int:product_id>', cart_remove, name='cart_remove'),
     path('login/', user_login, name='login'),
     path('logout/', logout_view, name='logout'),
-    path('register/', register, name='register')
+    path('register/', register, name='register'),
+    path('history/', purchase_history, name='history'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

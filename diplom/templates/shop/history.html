@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    History
+{% endblock %}
+{% block content %}
+    <h1>Purchase history</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit price</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for purchase in purchases %}
+            {% with buy=item.purchase %}
+                <tr>
+                    <td>
+                        <a href="{% url "product_details_view" prod.id%}">
+                            <img src="
+                                {% if prod.image %}
+                                    {{ prod.image.url }}
+                                {% else %}
+                                    {% static 'no-image.jpg' %}
+                                {% endif %}" width="80" height="80">
+                        </a>
+                    </td>
+                    <td>{{ prod.title }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td class="num">{{ item.cost }}</td>
+                    <td class="num">{{ item.total_cost }}</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a class="btn btn-dark btn-sm" href="{% url "main" %}" role="button">Main</a>
+    </p>
+{% endblock %}

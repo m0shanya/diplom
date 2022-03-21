@@ -19,3 +19,10 @@ body {
     max-height: 150px;
     width: auto;
 }
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}

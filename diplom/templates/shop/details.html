@@ -1,14 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Product page{% endblock %}
 
 {% block content %}
 <main class="product-details">
+  <img src="
+    {% if product.image %}
+      {{ product.image.url }}
+    {% else %}
+      {% static 'no-image.jpg' %}
+    {% endif %}" class="img-thumbnail" alt="prod_image">
   <h1 class="my-4">{{ product.title }}</h1>
   <div class="row">
     <div class="col-8">
       <h3 class="mb-3">Cost: {{ product.cost }}</h3>
-      <h3 class="mb-3">Status: {{ product.get_status_display }}</h3>
+      <h3 class="mb-3">Category: {{ product.category.slug }}</h3>
       <div class="mb-3">
         <h3 class="mb-3">Description:</h3>
         {{ product.description }}
@@ -29,6 +36,7 @@
             </div>
           </div>
       </form>
+
       <form method="post" action="{% url 'cart_add' product.id %}">
         {% csrf_token %}
             <h3 class="mb-3">Add to cart</h3>

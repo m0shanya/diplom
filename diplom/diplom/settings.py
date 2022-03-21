@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_(xo^2y*@1%_93%cs(%5(#$k7w%vh)10fpr7vdnxg&yb^uoiws
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap5',
+    'diplom',
     'shop',
     'cart',
 ]
@@ -84,10 +85,10 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 DATABASES = {
    "default": {
        "ENGINE": "django.db.backends.postgresql",
-       "NAME": "diplom",
-       "USER": "diplom",
-       "PASSWORD": "diplom",
-       "HOST": "localhost",
+       "NAME": os.getenv("POSTGRES_NAME", "diplom"),
+       "USER": os.getenv("POSTGRES_USER", "diplom"),
+       "PASSWORD": os.getenv("POSTGRES_PASS", "diplom"),
+       "HOST": os.getenv("POSTGRES_HOST", "localhost"),
        "PORT": 5432,
    }
 }
@@ -157,6 +158,10 @@ LOGGING = {
     'root': {
         'handlers': ['console'],
         'level': 'INFO',
+    },
+    "scrapy.core.scraper": {
+        "handlers": [],
+        "level": "ERROR",
     },
     'django.db.backends': {
         'handlers': ['console'],

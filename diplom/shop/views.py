@@ -25,3 +25,11 @@ def product_details_view(request, product_id):
             return redirect('/login/', )
     return render(request, "shop/details.html", {"product": product, 'product_cart_form': product_cart_form})
 
+
+def purchase_history(request):
+    if request.user.is_authenticated:
+        prod = Product.objects.all()
+        purchases = Buy.objects.filter(user=request.user)
+        return render(request, "shop/history.html", {'products': prod, 'purchases': purchases})
+    else:
+        return redirect('/login/', )
