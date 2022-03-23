@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 
 class Product(models.Model):
@@ -19,6 +20,7 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.cost}"
+
 
 
 class Buy(models.Model):
@@ -43,3 +45,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('product_list_by_category',
+                        args=[self.slug])

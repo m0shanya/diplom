@@ -8,28 +8,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" aria-current="page" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Products
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/">All products</a></li>
-              <div class="btn-group dropend">
-                  <a type="button" class="btn">
-                      Categories
-                  </a>
-                  <a type="button" class="btn dropdown-toggle dropdown-toggle-split"
-                          data-bs-toggle="dropdown" aria-expanded="false">
-                      <span class="visually-hidden">Toggle Dropright</span>
-                  </a>
-                  <ul class="dropdown-menu">
-                      <!-- Dropdown menu links -->
-                  </ul>
-              </div>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="/">All products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/cart/">Cart</a>
+          <a class="nav-link" href="/cart/">
+              {% with total_items=cart|length %}
+                  {% if cart|length > 0 %}
+                      Cart({{ total_items }} item{{ total_items|pluralize }}, {{ cart.get_total_price }} руб.)
+                  {% else %}
+                      Cart is empty
+                  {% endif %}
+              {% endwith %}
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/history/">History</a>

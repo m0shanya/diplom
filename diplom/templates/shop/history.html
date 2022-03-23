@@ -20,7 +20,7 @@
             {% with buy=item.purchase %}
                 <tr>
                     <td>
-                        <a href="{% url "product_details_view" prod.id%}">
+                        <a href="{% url "product_details_view" buy.id%}">
                             <img src="
                                 {% if prod.image %}
                                     {{ prod.image.url }}

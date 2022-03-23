@@ -8,7 +8,7 @@
       <img src="{% static 'no-image.jpg' %}" class="card-img-top img-thumbnail" alt="No image">
     {% endif %}
     <h5 class="card-title">{{ product.title }}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Cost: {{ product.cost }}</h6>
+    <h6 class="card-subtitle mb-2 text-muted">Cost: {{ product.cost }} руб.</h6>
     {% if product.description %}
       <p class="card-text">{{ product.description }}</p>
     {% endif %}

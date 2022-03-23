@@ -2,15 +2,20 @@ import logging
 
 from django.shortcuts import redirect, render, get_object_or_404
 
-from shop.models import Product, Buy
+from shop.models import Product, Buy, Category
 from cart.forms import CartAddProductForm
 
 logger = logging.getLogger(__name__)
 
 
-def prod_list(request):
+def prod_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
     prod = Product.objects.all()
-    return render(request, "shop/list.html", {"products": prod})
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        prod = prod.filter(category=category)
+    return render(request, "shop/list.html", {"products": prod, 'category': category, 'categories': categories})
 
 
 def product_details_view(request, product_id):
@@ -25,11 +30,3 @@ def product_details_view(request, product_id):
             return redirect('/login/', )
     return render(request, "shop/details.html", {"product": product, 'product_cart_form': product_cart_form})
 
-
-def purchase_history(request):
-    if request.user.is_authenticated:
-        prod = Product.objects.all()
-        purchases = Buy.objects.filter(user=request.user)
-        return render(request, "shop/history.html", {'products': prod, 'purchases': purchases})
-    else:
-        return redirect('/login/', )
