@@ -21,22 +21,6 @@
         {{ product.description }}
       </div>
 
-      <form method="post">
-        {% csrf_token %}
-        <h3 class="mb-3">Purchase this product</h3>
-        <div class="row">
-          <div class="col-6">
-            <div class="input-group mb-3">
-              <input name="count" type="text" class="form-control" placeholder="Count" aria-label="Cost"
-                     aria-describedby="product-count">
-              <span class="input-group-text" id="product-count">
-                <button type="submit" class="btn">Purchase</button>
-              </span>
-            </div>
-            </div>
-          </div>
-      </form>
-
       <form method="post" action="{% url 'cart_add' product.id %}">
         {% csrf_token %}
             <h3 class="mb-3">Add to cart</h3>
@@ -53,17 +37,6 @@
               </div>
             </div>
       </form>
-
-      {% if product.purchases.exists %}
-        <div>
-          <h3 class="my-3">Users previously purchased this product:</h3>
-          <ul>
-            {% for purchase in product.purchases.all %}
-              <li>{{ purchase.count }} item(s) by {{ purchase.user.username }} at {{ purchase.created_at }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
     </div>
   </div>
 </main>

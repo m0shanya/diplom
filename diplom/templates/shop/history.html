@@ -4,7 +4,7 @@
     History
 {% endblock %}
 {% block content %}
-    <h1>Purchase history</h1>
+    <h1>History</h1>
     <table class="table">
         <thead>
         <tr>
@@ -16,29 +16,31 @@
         </tr>
         </thead>
         <tbody>
-        {% for purchase in purchases %}
-            {% with buy=item.purchase %}
+        {% for item in cart %}
+            {% with product=item.product %}
                 <tr>
                     <td>
-                        <a href="{% url "product_details_view" buy.id%}">
+                        <a href="{% url "product_details_view" product.id%}">
                             <img src="
-                                {% if prod.image %}
-                                    {{ prod.image.url }}
+                                {% if product.image %}
+                                    {{ product.image.url }}
                                 {% else %}
                                     {% static 'no-image.jpg' %}
                                 {% endif %}" width="80" height="80">
                         </a>
                     </td>
-                    <td>{{ prod.title }}</td>
+                    <td>{{ product.title }}</td>
                     <td>{{ item.quantity }}</td>
                     <td class="num">{{ item.cost }}</td>
                     <td class="num">{{ item.total_cost }}</td>
                 </tr>
             {% endwith %}
         {% endfor %}
+        <tr class="total">
+            <td>Total</td>
+            <td colspan="4"></td>
+            <td class="num">{{ cart.get_total_price }}</td>
+        </tr>
         </tbody>
     </table>
-    <p class="text-right">
-        <a class="btn btn-dark btn-sm" href="{% url "main" %}" role="button">Main</a>
-    </p>
 {% endblock %}
