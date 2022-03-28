@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from shop.models import Product, Buy, Category, Order
+from shop.models import Product, Category, Order, Comment
 
 
 @admin.register(Category)
@@ -13,7 +13,7 @@ class CategoryAdminInline(admin.TabularInline):
 
 
 class PurchaseInline(admin.TabularInline):
-    model = Buy
+    model = Order
     raw_id_fields = ['purchase']
 
 
@@ -32,4 +32,10 @@ class OrderAdmin(admin.ModelAdmin):
                     'address', 'postal_code', 'paid',
                     'created_at', 'updated']
     list_filter = ['paid', 'created_at', 'updated']
-    inlines = [PurchaseInline]
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'product', 'created_at', 'active')
+    list_filter = ('active', 'created_at', 'updated')
+    search_fields = ('name', 'email', 'body')

@@ -4,7 +4,11 @@
 
 {% block content %}
     <h1>Thank you</h1>
-    <p>Your order has been successfully completed. Your order number is
-        <strong>{{ order.id }}</strong>.</p>
+    <p>Your order has been successfully completed.
+        {% for item in order %}
+          <a>{{ item }}</a>.
+        {% endfor %}
+    </p>
+
     <a class="btn btn-dark btn-sm" href="{% url "main" %}" role="button">Continue shopping</a>
 {% endblock %}

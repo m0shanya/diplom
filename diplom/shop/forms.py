@@ -7,3 +7,9 @@ class OrderForm(forms.Form):
     email = forms.EmailField()
     address = forms.CharField(max_length=250)
     postal_code = forms.CharField(max_length=20)
+
+
+class CommentForm(forms.Form):
+    name = forms.CharField(max_length=50)
+    email = forms.EmailField()
+    body = forms.CharField()
