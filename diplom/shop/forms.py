@@ -6,7 +6,6 @@ class ProductFiltersForm(forms.Form):
     ORDER_BY_CHOICES = (
         ("cost_asc", "Cost Asc"),
         ("cost_desc", "Cost Desc"),
-        ("max_count", "Max Count"),
         ("max_price", "Max Cost"),
     )
     cost__gt = forms.IntegerField(min_value=0, label="Cost Min", required=False)
@@ -37,4 +36,4 @@ class OrderForm(forms.Form):
 class CommentForm(forms.Form):
     name = forms.CharField(max_length=50)
     email = forms.EmailField()
-    body = forms.CharField()
+    body = forms.CharField(widget=forms.Textarea)

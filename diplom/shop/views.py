@@ -36,10 +36,6 @@ def prod_list(request, category_slug=None):
                 prod = prod.order_by("cost")
             if order_by == "cost_desc":
                 prod = prod.order_by("-cost")
-            if order_by == "max_count":
-                prod = prod.annotate(total_count=Sum("purchases__count")).order_by(
-                    "-total_count"
-                )
             if order_by == "max_price":
                 prod = prod.annotate(
                     total_cost=Sum("purchases__count") * F("cost")
