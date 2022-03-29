@@ -30,7 +30,7 @@ class ProductAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'first_name', 'last_name', 'email',
                     'address', 'postal_code', 'paid',
-                    'created_at', 'updated']
+                    'created_at', 'updated', 'delivery']
     list_filter = ['paid', 'created_at', 'updated']
 
 

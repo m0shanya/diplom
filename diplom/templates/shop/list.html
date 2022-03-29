@@ -21,6 +21,15 @@
   <main class="products">
     <h1 class="my-4">{% translate "Products" %}</h1>
     <div class="row">
+        <div class="col-3">
+            <div class="filters-form mb-4">
+                <h3>{% translate "Filters" %}</h3>
+                <form class="form-inline">
+                    {{ filters_form|crispy }}
+                    <button type="submit" class="save btn btn-dark btn-sm">{% translate "Search" %}</button>
+                </form>
+            </div>
+        </div>
       <div class="col-9">
         <div class="row">
           {% for product in products %}

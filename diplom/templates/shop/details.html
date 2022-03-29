@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_filters %}
 
 {% block title %}Product page{% endblock %}
 
@@ -39,5 +40,18 @@
       </form>
     </div>
   </div>
+  <hr>
+  {% for comment in comments %}
+    <div class="comment">
+        <p class="info">
+            Comment {{ forloop.counter }} by {{ comment.name }}({{ comment.email }})
+            {{ comment.created_at }}
+        </p>
+        {{ comment.body|linebreaks }}
+    </div>
+  {% empty %}
+    <p>There are no comments yet.</p>
+  {% endfor %}
+  <a class="btn btn-dark btn-sm" href="{% url "comment"  product.id %}" role="button">Add comment</a>
 </main>
 {% endblock %}

@@ -15,7 +15,8 @@
             <th>Quantity</th>
             <th>Unit price</th>
             <th>Price</th>
-        </tr>7
+            <th>Date</th>
+        </tr>
         </thead>
         <tbody>
         {% for item in order %}
@@ -33,6 +34,7 @@
                     <td>{{ item.count }}</td>
                     <td class="num">{{ item.cost }} BYN</td>
                     <td class="num">{{ item.get_cost}} BYN</td>
+                    <td>{{ item.created_at }}</td>
                 </tr>
             {% endwith %}
         {% endfor %}

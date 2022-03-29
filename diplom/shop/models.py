@@ -24,7 +24,9 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='orders', verbose_name="Заказы")
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='orders', verbose_name="Заказы"
+    )
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
@@ -38,6 +40,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     updated = models.DateTimeField(auto_now=True, db_index=True)
     paid = models.BooleanField(default=False)
+    delivery = models.CharField(max_length=13, null=True)
 
     class Meta:
         ordering = ('-created_at',)
